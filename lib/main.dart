@@ -335,45 +335,39 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: ButtonTheme(
+                          minWidth: 200.0,
                           shape: shape,
-                          child: Row(
-                            children: [
-                              Image(
-                                image: AssetImage('assets/O_1br.png'),
-                              ),
-                              ButtonTheme(
-                                minWidth: 200.0,
-                                //TODO: Make the image a transparent image, and put it inside a white button using a column. Give that button the same properties of the other buttons.
-                                shape: shape,
-                                height: height,
-                                child: FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      if (white1 == true) {
-                                        white1 = false;
-                                        return col1 = Colors.white;
-                                        oalgs.remove(
-                                            "R U2 R2 F R F' U2 R' F R F'");
-                                      } else {
-                                        white1 = true;
-                                        return col1 = Colors.green;
-                                        oalgs
-                                            .add("R U2 R2 F R F' U2 R' F R F'");
-                                      }
-                                    });
-                                    print(oalgs); //ChangeData();
-                                  },
-                                  child: Text(
-                                    "R U2 R2 F R F' U2 R' F R F'",
-                                    style: TextStyle(
-                                        fontSize: fontSize,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Oswald'),
-                                  ),
-                                  color: col1,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white1 == true) {
+                                  white1 = false;
+                                  return col1 = Colors.white;
+                                  oalgs.remove("R U2 R2 F R F' U2 R' F R F'");
+                                } else {
+                                  white1 = true;
+                                  return col1 = Colors.green;
+                                  oalgs.add("R U2 R2 F R F' U2 R' F R F'");
+                                }
+                              });
+                              print(oalgs); //ChangeData();
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_1br.png'),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  "R U2 R2 F R F' U2 R' F R F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col1,
                           ),
                         ),
                       ), //#1
@@ -397,12 +391,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U r' U2 r U2 R' U2 R U' r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_2 .png'),
+                                ),
+                                Text(
+                                  "r U r' U2 r U2 R' U2 R U' r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col2,
                           ),
@@ -428,13 +429,18 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r' R2 U R' U r U2 r' U M'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
-                            ),
+                            child: Row(children: [
+                              Image(
+                                image: AssetImage('assets/O_3.png'),
+                              ),
+                              Text(
+                                "r' R2 U R' U r U2 r' U M'",
+                                style: TextStyle(
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald'),
+                              ),
+                            ]),
                             color: col3,
                           ),
                         ),
@@ -459,12 +465,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "M U' r U2 r' U' R U' R' M'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_4.png'),
+                                ),
+                                Text(
+                                  "M U' r U2 r' U' R U' R' M'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col4,
                           ),
@@ -490,12 +503,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "l' U2 L U L' U l",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_5.png'),
+                                ),
+                                Text(
+                                  "l' U2 L U L' U l",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col5,
                           ),
@@ -521,12 +541,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U2 R' U' R U' r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_6.png'),
+                                ),
+                                Text(
+                                  "r U2 R' U' R U' r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col6,
                           ),
@@ -552,12 +579,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U R' U R U2 r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_7.png'),
+                                ),
+                                Text(
+                                  "r U R' U R U2 r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col7,
                           ),
@@ -583,12 +617,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "l' U' L U' L' U2 l",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_8.png'),
+                                ),
+                                Text(
+                                  "l' U' L U' L' U2 l",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col8,
                           ),
@@ -614,12 +655,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U' R' F R2 U R' U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_9.png'),
+                                ),
+                                Text(
+                                  "R U R' U' R' F R2 U R' U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col9,
                           ),
@@ -645,13 +693,18 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U R' F R F' R U2 R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
-                            ),
+                            child: Row(children: [
+                              Image(
+                                image: AssetImage('assets/O_10.png'),
+                              ),
+                              Text(
+                                "R U R' U R' F R F' R U2 R'",
+                                style: TextStyle(
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald'),
+                              ),
+                            ]),
                             color: col10,
                           ),
                         ),
@@ -676,12 +729,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U R' U R' F R F' R U2 r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_11.png'),
+                                ),
+                                Text(
+                                  "r U R' U R' F R F' R U2 r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col11,
                           ),
@@ -707,12 +767,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "M' R' U' R U' R' U2 R U' R r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_12.png'),
+                                ),
+                                Text(
+                                  "M' R' U' R U' R' U2 R U' R r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col12,
                           ),
@@ -738,12 +805,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "M' R' U' R U' R' U2 R U' R r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_13.png'),
+                                ),
+                                Text(
+                                  "M' R' U' R U' R' U2 R U' R r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col13,
                           ),
@@ -769,12 +843,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' F R U R' F' R F U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_14.png'),
+                                ),
+                                Text(
+                                  "R' F R U R' F' R F U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col14,
                           ),
@@ -800,12 +881,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "l' U' l L' U' L U l' U l",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_15.png'),
+                                ),
+                                Text(
+                                  "l' U' l L' U' L U l' U l",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col15,
                           ),
@@ -831,12 +919,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U r' R U R' U' r U' r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_16.png'),
+                                ),
+                                Text(
+                                  "r U r' R U R' U' r U' r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col16,
                           ),
@@ -862,12 +957,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F R' F' R2 r' U R U' R' U' M'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_17.png'),
+                                ),
+                                Text(
+                                  "F R' F' R2 r' U R U' R' U' M'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col17,
                           ),
@@ -894,12 +996,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U R' U R U2 r2 U' R U' R' U2 r",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_18.png'),
+                                ),
+                                Text(
+                                  "r U R' U R U2 r2 U' R U' R' U2 r",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col18,
                           ),
@@ -925,12 +1034,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r' R U R U R' U' M' R' F R F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_19.png'),
+                                ),
+                                Text(
+                                  "r' R U R U R' U' M' R' F R F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col19,
                           ),
@@ -956,12 +1072,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U R' U' M2 U R U' R' U' M'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_20.png'),
+                                ),
+                                Text(
+                                  "r U R' U' M2 U R U' R' U' M'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col20,
                           ),
@@ -987,12 +1110,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U2 R' U' R U R' U' R U' R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_21.png'),
+                                ),
+                                Text(
+                                  "R U2 R' U' R U R' U' R U' R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col21,
                           ),
@@ -1018,12 +1148,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U2 R2 U' R2 U' R2 U2 R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_22.png'),
+                                ),
+                                Text(
+                                  "R U2 R2 U' R2 U' R2 U2 R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col22,
                           ),
@@ -1049,12 +1186,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R2 D' R U2 R' D R U2 R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_23.png'),
+                                ),
+                                Text(
+                                  "R2 D' R U2 R' D R U2 R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col23,
                           ),
@@ -1080,12 +1224,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U R' U' r' F R F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_24.png'),
+                                ),
+                                Text(
+                                  "r U R' U' r' F R F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col24,
                           ),
@@ -1111,12 +1262,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F' r U R' U' r' F R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_25.png'),
+                                ),
+                                Text(
+                                  "F' r U R' U' r' F R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col25,
                           ),
@@ -1142,12 +1300,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U2 R' U' R U' R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_26.png'),
+                                ),
+                                Text(
+                                  "R U2 R' U' R U' R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col26,
                           ),
@@ -1173,12 +1338,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U R U2 R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_27.png'),
+                                ),
+                                Text(
+                                  "R U R' U R U2 R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col27,
                           ),
@@ -1204,12 +1376,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U R' U' r' R U R U' R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_28.png'),
+                                ),
+                                Text(
+                                  "r U R' U' r' R U R U' R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col28,
                           ),
@@ -1236,12 +1415,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U' R U' R' F' U' F R U R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_29.png'),
+                                ),
+                                Text(
+                                  "R U R' U' R U' R' F' U' F R U R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col29,
                           ),
@@ -1267,12 +1453,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F R' F R2 U' R' U' R U R' F2",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_30.png'),
+                                ),
+                                Text(
+                                  "F R' F R2 U' R' U' R U R' F2",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col30,
                           ),
@@ -1298,12 +1491,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' U' F U R U' R' F' R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_30.png'),
+                                ),
+                                Text(
+                                  "R' U' F U R U' R' F' R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col31,
                           ),
@@ -1329,12 +1529,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "L U F' U' L' U L F L'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_31.png'),
+                                ),
+                                Text(
+                                  "L U F' U' L' U L F L'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col32,
                           ),
@@ -1360,12 +1567,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U' R' F R F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_33.png'),
+                                ),
+                                Text(
+                                  "R U R' U' R' F R F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col33,
                           ),
@@ -1391,12 +1605,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R2 U' R' F R U R U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_34.png'),
+                                ),
+                                Text(
+                                  "R U R2 U' R' F R U R U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col34,
                           ),
@@ -1422,12 +1643,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U2 R2 F R F' R U2 R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_35.png'),
+                                ),
+                                Text(
+                                  "R U2 R2 F R F' R U2 R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col35,
                           ),
@@ -1453,12 +1681,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "L' U' L U' L' U L U L F' L' F",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_36.png'),
+                                ),
+                                Text(
+                                  "L' U' L U' L' U L U L F' L' F",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col36,
                           ),
@@ -1484,12 +1719,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F R' F' R U R U' R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_37.png'),
+                                ),
+                                Text(
+                                  "F R' F' R U R U' R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col37,
                           ),
@@ -1501,29 +1743,36 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                           minWidth: 125.0,
                           height: height,
                           child: FlatButton(
-                            shape: shape,
-                            onPressed: () {
-                              setState(() {
-                                if (white38 == true) {
-                                  white38 = false;
-                                  return col38 = Colors.white;
-                                  oalgs.remove("R U R' U R U' R' U' R' F R F'");
-                                } else {
-                                  white38 = true;
-                                  return col38 = Colors.green;
-                                  oalgs.add("R U R' U R U' R' U' R' F R F'");
-                                }
-                              });
-                            },
-                            child: Text(
-                              "R U R' U R U' R' U' R' F R F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
-                            ),
-                            color: col38,
-                          ),
+                              shape: shape,
+                              onPressed: () {
+                                setState(() {
+                                  if (white38 == true) {
+                                    white38 = false;
+                                    return col38 = Colors.white;
+                                    oalgs.remove(
+                                        "R U R' U R U' R' U' R' F R F'");
+                                  } else {
+                                    white38 = true;
+                                    return col38 = Colors.green;
+                                    oalgs.add("R U R' U R U' R' U' R' F R F'");
+                                  }
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Image(
+                                    image: AssetImage('assets/O_38.png'),
+                                  ),
+                                  Text(
+                                    "R U R' U R U' R' U' R' F R F'",
+                                    style: TextStyle(
+                                        fontSize: fontSize,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Oswald'),
+                                  ),
+                                ],
+                              ),
+                              color: col38),
                         ),
                       ), //#38
                       Padding(
@@ -1546,12 +1795,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "L F' L' U' L U F U' L'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_39.png'),
+                                ),
+                                Text(
+                                  "L F' L' U' L U F U' L'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col39,
                           ),
@@ -1577,12 +1833,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' F R U R' U' F' U R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_40.png'),
+                                ),
+                                Text(
+                                  "R' F R U R' U' F' U R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col40,
                           ),
@@ -1609,12 +1872,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U R U2 R' F R U R' U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_41.png'),
+                                ),
+                                Text(
+                                  "R U R' U R U2 R' F R U R' U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col41,
                           ),
@@ -1642,12 +1912,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' U' R U' R' U2 R F R U R' U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_42.png'),
+                                ),
+                                Text(
+                                  "R' U' R U' R' U2 R F R U R' U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col42,
                           ),
@@ -1673,12 +1950,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "f ' L' U' L U f",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_43.png'),
+                                ),
+                                Text(
+                                  "f ' L' U' L U f",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col43,
                           ),
@@ -1704,12 +1988,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "f R U R' U' f'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_44.png'),
+                                ),
+                                Text(
+                                  "f R U R' U' f'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col44,
                           ),
@@ -1735,12 +2026,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F R U R' U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_45.png'),
+                                ),
+                                Text(
+                                  "F R U R' U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col45,
                           ),
@@ -1766,12 +2064,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' U' R' F R F' U R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_46.png'),
+                                ),
+                                Text(
+                                  "R' U' R' F R F' U R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col46,
                           ),
@@ -1797,12 +2102,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' U' R' F R F' R' F R F' U R",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_47.png'),
+                                ),
+                                Text(
+                                  "R' U' R' F R F' R' F R F' U R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col47,
                           ),
@@ -1828,12 +2140,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F R U R' U' R U R' U' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_48.png'),
+                                ),
+                                Text(
+                                  "F R U R' U' R U R' U' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col48,
                           ),
@@ -1859,12 +2178,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U' r2 U r2 U r2 U' r",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_49.png'),
+                                ),
+                                Text(
+                                  "r U' r2 U r2 U r2 U' r",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col49,
                           ),
@@ -1890,12 +2216,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r' U r2 U' r2 U' r2 U r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_50.png'),
+                                ),
+                                Text(
+                                  "r' U r2 U' r2 U' r2 U r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col50,
                           ),
@@ -1921,12 +2254,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "F U R U' R' U R U' R' F'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_51.png'),
+                                ),
+                                Text(
+                                  "F U R U' R' U R U' R' F'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col51,
                           ),
@@ -1952,12 +2292,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U R U' B U' B' R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_52.png'),
+                                ),
+                                Text(
+                                  "R U R' U R U' B U' B' R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col52,
                           ),
@@ -1983,12 +2330,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "l' U2 L U L' U' L U L' U l",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_53.png'),
+                                ),
+                                Text(
+                                  "l' U2 L U L' U' L U L' U l",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col53,
                           ),
@@ -2014,12 +2368,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r U2 R' U' R U R' U' R U' r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_54.png'),
+                                ),
+                                Text(
+                                  "r U2 R' U' R U R' U' R U' r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col54,
                           ),
@@ -2047,12 +2408,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R' F R U R U' R2 F' R2 U' R' U R U R'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_55.png'),
+                                ),
+                                Text(
+                                  "R' F R U R U' R2 F' R2 U' R' U R U R'",
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col55,
                           ),
@@ -2080,12 +2448,19 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "r' U' r U' R' U R U' R' U R r' U r",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_56.png'),
+                                ),
+                                Text(
+                                  "r' U' r U' R' U R U' R' U R r' U r",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col56,
                           ),
@@ -2111,17 +2486,24 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 }
                               });
                             },
-                            child: Text(
-                              "R U R' U' M' U R U' r'",
-                              style: TextStyle(
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Oswald'),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_57.png'),
+                                ),
+                                Text(
+                                  "R U R' U' M' U R U' r'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
                             ),
                             color: col57,
                           ),
                         ),
-                      ), //#57
+                      ),
                     ],
                   ),
                 ),
