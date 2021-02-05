@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
-import 'OLL Dropdown.dart';
-import 'All PLL.dart';
+import 'package:flutter/foundation.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
@@ -10,11 +8,195 @@ var height1 = 210.0;
 var fontSize1 = 50.0;
 var height = 160.0;
 var minWidth = 50.0;
-var fontSize = 20.0;
+var fontSize = 17.0;
 var all = false;
 var edges = false;
 var corners = false;
 var both = false;
+
+var shape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(10.0),
+);
+
+class Storage {}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Home Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+
+//The Main Widget
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  Animation animation,
+      delayedAnimation,
+      muchDelayedAnimation,
+      transformationAnim;
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController =
+        AnimationController(duration: Duration(seconds: 1), vsync: this);
+
+    animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.1, 1.0, curve: Curves.fastOutSlowIn)));
+
+    delayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)));
+
+    muchDelayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.40, 1.0, curve: Curves.fastOutSlowIn)));
+
+    animationController.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("OLL and PLL Trainer"),
+        centerTitle: true,
+        backgroundColor: Colors.red,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: AnimatedBuilder(
+            animation: animationController,
+            builder: (BuildContext context, Widget child) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Transform(
+                    transform: Matrix4.translationValues(
+                        animation.value * width, 0.0, 0.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ButtonTheme(
+                        minWidth: minWidth,
+                        height: height1,
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OLLTrainer(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "OLL Trainer",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: fontSize1,
+                                fontFamily: 'Oswald'),
+                          ),
+                          color: Colors.amber,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Transform(
+                    transform: Matrix4.translationValues(
+                        delayedAnimation.value * width, 0.0, 0.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ButtonTheme(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        minWidth: minWidth,
+                        height: height1,
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PLL(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "PLL Trainer",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: fontSize1,
+                                fontFamily: 'Oswald'),
+                          ),
+                          color: Colors.orange,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Transform(
+                    transform: Matrix4.translationValues(
+                        muchDelayedAnimation.value * width, 0.0, 0.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ButtonTheme(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        minWidth: minWidth,
+                        height: height1,
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Timer(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Timer",
+                            style: TextStyle(
+                                fontSize: fontSize1,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Oswald'),
+                          ),
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OLL Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
 
 var white1 = false;
 Color col1 = Colors.white;
@@ -131,183 +313,96 @@ Color col56 = Colors.white;
 var white57 = false;
 Color col57 = Colors.white;
 
-List<String> oalgs = [""];
-
-var shape = RoundedRectangleBorder(
-  borderRadius: BorderRadius.circular(10.0),
-);
-
-//The Main Widget
-class Home extends StatefulWidget {
+class OLLPage extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _OLLPageState createState() => _OLLPageState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  Animation animation,
-      delayedAnimation,
-      muchDelayedAnimation,
-      transformationAnim;
-  AnimationController animationController;
+class _OLLPageState extends State<OLLPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+List<String> oalgs = [""];
+
+class OLLDropDown extends StatefulWidget {
+  OLLDropDown({Key key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
-    animationController =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
+  _OLLDropDownState createState() => _OLLDropDownState();
+}
 
-    animation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
-        parent: animationController,
-        curve: Interval(0.1, 1.0, curve: Curves.fastOutSlowIn)));
-
-    delayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
-        parent: animationController,
-        curve: Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)));
-
-    muchDelayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
-        parent: animationController,
-        curve: Interval(0.40, 1.0, curve: Curves.fastOutSlowIn)));
-
-    //transformationAnim = Tween(begin: 1.0, end: 0.0).animate();
-
-    animationController.forward();
-  }
+class _OLLDropDownState extends State<OLLDropDown> {
+  String dropdownValue = 'All';
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("OLL and PLL Trainer"),
-        centerTitle: true,
-        backgroundColor: Colors.red,
-      ),
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/Cube.png'),
-              fit: BoxFit.cover,
+    return Center(
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.white,
+            ),
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 3),
+            padding: EdgeInsets.all(5),
+            child: Row(
+              children: [
+                SizedBox(width: 5),
+                Text("Sort by "),
+                SizedBox(width: 25.0),
+                DropdownButton<String>(
+                    value: dropdownValue,
+                    dropdownColor: Colors.white,
+                    focusColor: Colors.white,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.black54),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                      });
+                    },
+                    items: <String>[
+                      'All',
+                      'Corners Correct',
+                      'Lightning Bolts',
+                      'Awkward Shapes',
+                      'Squares',
+                      'Crosses',
+                      'Fish',
+                      'Dots',
+                      'Bars',
+                      'Ts',
+                      'Ls',
+                      'Cs',
+                      'Ws',
+                      'Ps'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList()),
+                SizedBox(width: 25),
+              ],
             ),
           ),
-          child: AnimatedBuilder(
-            animation: animationController,
-            builder: (BuildContext context, Widget child) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Transform(
-                    transform: Matrix4.translationValues(
-                        animation.value * width, 0.0, 0.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ButtonTheme(
-                        minWidth: minWidth,
-                        height: height1,
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => OLL_Trainer()));
-                          },
-                          child: Text(
-                            "OLL Trainer",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: fontSize1,
-                                fontFamily: 'Oswald'),
-                          ),
-                          color: Colors.amber,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Transform(
-                    transform: Matrix4.translationValues(
-                        delayedAnimation.value * width, 0.0, 0.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ButtonTheme(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        minWidth: minWidth,
-                        height: height1,
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PLL_Trainer()));
-                          },
-                          child: Text(
-                            "PLL Trainer",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: fontSize1,
-                                fontFamily: 'Oswald'),
-                          ),
-                          color: Colors.orange,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Transform(
-                    transform: Matrix4.translationValues(
-                        muchDelayedAnimation.value * width, 0.0, 0.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ButtonTheme(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        minWidth: minWidth,
-                        height: height1,
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Timer()));
-                          },
-                          child: Text(
-                            "Timer",
-                            style: TextStyle(
-                                fontSize: fontSize1,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Oswald'),
-                          ),
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
+        ],
       ),
     );
   }
 }
 
-// ignore: camel_case_types
-class OLL_Trainer extends StatefulWidget {
+class OLLTrainer extends StatefulWidget {
   @override
-  _OLL_TrainerState createState() => _OLL_TrainerState();
+  _OLLTrainerState createState() => _OLLTrainerState();
 }
 
-//OLL Page
-// ignore: camel_case_types
-class _OLL_TrainerState extends State<OLL_Trainer> {
+class _OLLTrainerState extends State<OLLTrainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -331,7 +426,7 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                   child: ListView(
                     scrollDirection: Axis.vertical,
                     children: [
-                      OLL_DropDown(),
+                      OLLDropDown(),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: ButtonTheme(
@@ -344,14 +439,12 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white1 == true) {
                                   white1 = false;
                                   return col1 = Colors.white;
-                                  oalgs.remove("R U2 R2 F R F' U2 R' F R F'");
                                 } else {
                                   white1 = true;
                                   return col1 = Colors.green;
-                                  oalgs.add("R U2 R2 F R F' U2 R' F R F'");
                                 }
                               });
-                              print(oalgs); //ChangeData();
+                              print(oalgs);
                             },
                             child: Row(
                               children: [
@@ -361,9 +454,10 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 Text(
                                   "R U2 R2 F R F' U2 R' F R F'",
                                   style: TextStyle(
-                                      fontSize: fontSize,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Oswald'),
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald',
+                                  ),
                                 ),
                               ],
                             ),
@@ -383,11 +477,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white2 == true) {
                                   white2 = false;
                                   return col2 = Colors.white;
-                                  oalgs.remove("r U r' U2 r U2 R' U2 R U' r'");
                                 } else {
                                   white2 = true;
                                   return col2 = Colors.green;
-                                  oalgs.add("r U r' U2 r U2 R' U2 R U' r'");
                                 }
                               });
                             },
@@ -421,11 +513,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white3 == true) {
                                   white3 = false;
                                   return col3 = Colors.white;
-                                  oalgs.remove("r' R2 U R' U r U2 r' U M'");
                                 } else {
                                   white3 = true;
                                   return col3 = Colors.green;
-                                  oalgs.add("r' R2 U R' U r U2 r' U M'");
                                 }
                               });
                             },
@@ -457,11 +547,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white4 == true) {
                                   white4 = false;
                                   return col4 = Colors.white;
-                                  oalgs.remove("M U' r U2 r' U' R U' R' M'");
                                 } else {
                                   white4 = true;
                                   return col4 = Colors.green;
-                                  oalgs.add("M U' r U2 r' U' R U' R' M'");
                                 }
                               });
                             },
@@ -495,11 +583,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white5 == true) {
                                   white5 = false;
                                   return col5 = Colors.white;
-                                  oalgs.remove("l' U2 L U L' U l");
                                 } else {
                                   white5 = true;
                                   return col5 = Colors.green;
-                                  oalgs.add("l' U2 L U L' U l");
                                 }
                               });
                             },
@@ -533,11 +619,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white6 == true) {
                                   white6 = false;
                                   return col6 = Colors.white;
-                                  oalgs.remove("r U2 R' U' R U' r'");
                                 } else {
-                                  white1 = true;
+                                  white6 = true;
                                   return col6 = Colors.green;
-                                  oalgs.add("r U2 R' U' R U' r'");
                                 }
                               });
                             },
@@ -571,11 +655,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white7 == true) {
                                   white7 = false;
                                   return col7 = Colors.white;
-                                  oalgs.remove("r U R' U R U2 r'");
                                 } else {
                                   white7 = true;
                                   return col7 = Colors.green;
-                                  oalgs.add("r U R' U R U2 r'");
                                 }
                               });
                             },
@@ -609,11 +691,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white8 == true) {
                                   white8 = false;
                                   return col8 = Colors.white;
-                                  oalgs.remove("l' U' L U' L' U2 l");
                                 } else {
                                   white8 = true;
                                   return col8 = Colors.green;
-                                  oalgs.add("l' U' L U' L' U2 l");
                                 }
                               });
                             },
@@ -647,11 +727,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white9 == true) {
                                   white9 = false;
                                   return col9 = Colors.white;
-                                  oalgs.remove("R U R' U' R' F R2 U R' U' F'");
                                 } else {
                                   white9 = true;
                                   return col9 = Colors.green;
-                                  oalgs.remove("R U R' U' R' F R2 U R' U' F'");
                                 }
                               });
                             },
@@ -685,11 +763,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white10 == true) {
                                   white10 = false;
                                   return col10 = Colors.white;
-                                  oalgs.remove("R U R' U R' F R F' R U2 R'");
                                 } else {
                                   white10 = true;
                                   return col10 = Colors.green;
-                                  oalgs.add("R U R' U R' F R F' R U2 R'");
                                 }
                               });
                             },
@@ -721,11 +797,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white11 == true) {
                                   white11 = false;
                                   return col11 = Colors.white;
-                                  oalgs.remove("r U R' U R' F R F' R U2 r'");
                                 } else {
                                   white11 = true;
                                   return col11 = Colors.green;
-                                  oalgs.add("r U R' U R' F R F' R U2 r'");
                                 }
                               });
                             },
@@ -759,11 +833,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white12 == true) {
                                   white12 = false;
                                   return col12 = Colors.white;
-                                  oalgs.remove("M' R' U' R U' R' U2 R U' R r'");
                                 } else {
                                   white12 = true;
                                   return col12 = Colors.green;
-                                  oalgs.add("M' R' U' R U' R' U2 R U' R r'");
                                 }
                               });
                             },
@@ -797,11 +869,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white13 == true) {
                                   white13 = false;
                                   return col13 = Colors.white;
-                                  oalgs.remove("M' R' U' R U' R' U2 R U' R r'");
                                 } else {
                                   white13 = true;
                                   return col13 = Colors.green;
-                                  oalgs.add("M' R' U' R U' R' U2 R U' R r'");
                                 }
                               });
                             },
@@ -835,11 +905,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white14 == true) {
                                   white14 = false;
                                   return col14 = Colors.white;
-                                  oalgs.remove("R' F R U R' F' R F U' F'");
                                 } else {
                                   white14 = true;
                                   return col14 = Colors.green;
-                                  oalgs.add("R' F R U R' F' R F U' F'");
                                 }
                               });
                             },
@@ -873,11 +941,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white15 == true) {
                                   white15 = false;
                                   return col15 = Colors.white;
-                                  oalgs.remove("l' U' l L' U' L U l' U l");
                                 } else {
                                   white15 = true;
                                   return col15 = Colors.green;
-                                  oalgs.add("l' U' l L' U' L U l' U l");
                                 }
                               });
                             },
@@ -911,11 +977,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white16 == true) {
                                   white16 = false;
                                   return col16 = Colors.white;
-                                  oalgs.remove("r U r' R U R' U' r U' r'");
                                 } else {
                                   white16 = true;
                                   return col16 = Colors.green;
-                                  oalgs.add("r U r' R U R' U' r U' r'");
                                 }
                               });
                             },
@@ -949,11 +1013,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white17 == true) {
                                   white17 = false;
                                   return col17 = Colors.white;
-                                  oalgs.remove("F R' F' R2 r' U R U' R' U' M'");
                                 } else {
                                   white17 = true;
                                   return col17 = Colors.green;
-                                  oalgs.add("F R' F' R2 r' U R U' R' U' M'");
                                 }
                               });
                             },
@@ -987,12 +1049,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white18 == true) {
                                   white18 = false;
                                   return col18 = Colors.white;
-                                  oalgs.remove(
-                                      "r U R' U R U2 r2 U' R U' R' U2 r");
                                 } else {
                                   white18 = true;
                                   return col18 = Colors.green;
-                                  oalgs.add("r U R' U R U2 r2 U' R U' R' U2 r");
                                 }
                               });
                             },
@@ -1026,11 +1085,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white19 == true) {
                                   white19 = false;
                                   return col19 = Colors.white;
-                                  oalgs.remove("r' R U R U R' U' M' R' F R F'");
                                 } else {
                                   white19 = true;
                                   return col19 = Colors.green;
-                                  oalgs.add("r' R U R U R' U' M' R' F R F'");
                                 }
                               });
                             },
@@ -1064,11 +1121,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white20 == true) {
                                   white20 = false;
                                   return col20 = Colors.white;
-                                  oalgs.remove("r U R' U' M2 U R U' R' U' M'");
                                 } else {
                                   white20 = true;
                                   return col20 = Colors.green;
-                                  oalgs.add("r U R' U' M2 U R U' R' U' M'");
                                 }
                               });
                             },
@@ -1102,11 +1157,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white21 == true) {
                                   white21 = false;
                                   return col21 = Colors.white;
-                                  oalgs.remove("R U2 R' U' R U R' U' R U' R'");
                                 } else {
                                   white21 = true;
                                   return col21 = Colors.green;
-                                  oalgs.add("R U2 R' U' R U R' U' R U' R'");
                                 }
                               });
                             },
@@ -1140,11 +1193,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white22 == true) {
                                   white22 = false;
                                   return col22 = Colors.white;
-                                  oalgs.remove("R U2 R2 U' R2 U' R2 U2 R");
                                 } else {
                                   white22 = true;
                                   return col22 = Colors.green;
-                                  oalgs.add("R U2 R2 U' R2 U' R2 U2 R");
                                 }
                               });
                             },
@@ -1178,11 +1229,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white23 == true) {
                                   white23 = false;
                                   return col23 = Colors.white;
-                                  oalgs.remove("R2 D' R U2 R' D R U2 R");
                                 } else {
                                   white23 = true;
                                   return col23 = Colors.green;
-                                  oalgs.add("R2 D' R U2 R' D R U2 R");
                                 }
                               });
                             },
@@ -1216,11 +1265,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white24 == true) {
                                   white24 = false;
                                   return col24 = Colors.white;
-                                  oalgs.remove("r U R' U' r' F R F'");
                                 } else {
                                   white24 = true;
                                   return col24 = Colors.green;
-                                  oalgs.add("r U R' U' r' F R F'");
                                 }
                               });
                             },
@@ -1254,11 +1301,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white25 == true) {
                                   white25 = false;
                                   return col25 = Colors.white;
-                                  oalgs.remove("F' r U R' U' r' F R");
                                 } else {
                                   white25 = true;
                                   return col25 = Colors.green;
-                                  oalgs.add("F' r U R' U' r' F R");
                                 }
                               });
                             },
@@ -1292,11 +1337,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white26 == true) {
                                   white26 = false;
                                   return col26 = Colors.white;
-                                  oalgs.remove("R U2 R' U' R U' R'");
                                 } else {
                                   white26 = true;
                                   return col26 = Colors.green;
-                                  oalgs.add("R U2 R' U' R U' R'");
                                 }
                               });
                             },
@@ -1330,11 +1373,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white27 == true) {
                                   white27 = false;
                                   return col27 = Colors.white;
-                                  oalgs.remove("R U R' U R U2 R'");
                                 } else {
                                   white27 = true;
                                   return col27 = Colors.green;
-                                  oalgs.add("R U R' U R U2 R'");
                                 }
                               });
                             },
@@ -1368,11 +1409,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white28 == true) {
                                   white28 = false;
                                   return col28 = Colors.white;
-                                  oalgs.remove("r U R' U' r' R U R U' R'");
                                 } else {
                                   white28 = true;
                                   return col28 = Colors.green;
-                                  oalgs.add("r U R' U' r' R U R U' R'");
                                 }
                               });
                             },
@@ -1406,12 +1445,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white29 == true) {
                                   white29 = false;
                                   return col29 = Colors.white;
-                                  oalgs.remove(
-                                      "R U R' U' R U' R' F' U' F R U R'");
                                 } else {
                                   white29 = true;
                                   return col29 = Colors.green;
-                                  oalgs.add("R U R' U' R U' R' F' U' F R U R'");
                                 }
                               });
                             },
@@ -1445,11 +1481,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white30 == true) {
                                   white30 = false;
                                   return col30 = Colors.white;
-                                  oalgs.remove("F R' F R2 U' R' U' R U R' F2");
                                 } else {
                                   white30 = true;
                                   return col30 = Colors.green;
-                                  oalgs.add("F R' F R2 U' R' U' R U R' F2");
                                 }
                               });
                             },
@@ -1483,18 +1517,16 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white31 == true) {
                                   white31 = false;
                                   return col31 = Colors.white;
-                                  oalgs.remove("R' U' F U R U' R' F' R");
                                 } else {
                                   white31 = true;
                                   return col31 = Colors.green;
-                                  oalgs.add("R' U' F U R U' R' F' R");
                                 }
                               });
                             },
                             child: Row(
                               children: [
                                 Image(
-                                  image: AssetImage('assets/O_30.png'),
+                                  image: AssetImage('assets/O_31.png'),
                                 ),
                                 Text(
                                   "R' U' F U R U' R' F' R",
@@ -1521,18 +1553,16 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white32 == true) {
                                   white32 = false;
                                   return col32 = Colors.white;
-                                  oalgs.remove("L U F' U' L' U L F L'");
                                 } else {
                                   white32 = true;
                                   return col32 = Colors.green;
-                                  oalgs.add("L U F' U' L' U L F L'");
                                 }
                               });
                             },
                             child: Row(
                               children: [
                                 Image(
-                                  image: AssetImage('assets/O_31.png'),
+                                  image: AssetImage('assets/O_32.png'),
                                 ),
                                 Text(
                                   "L U F' U' L' U L F L'",
@@ -1559,11 +1589,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white33 == true) {
                                   white33 = false;
                                   return col33 = Colors.white;
-                                  oalgs.remove("R U R' U' R' F R F'");
                                 } else {
                                   white33 = true;
                                   return col33 = Colors.green;
-                                  oalgs.add("R U R' U' R' F R F'");
                                 }
                               });
                             },
@@ -1597,11 +1625,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white34 == true) {
                                   white34 = false;
                                   return col34 = Colors.white;
-                                  oalgs.remove("R U R' U' R' F R F'");
                                 } else {
                                   white34 = true;
                                   return col34 = Colors.green;
-                                  oalgs.add("R U R' U' R' F R F'");
                                 }
                               });
                             },
@@ -1635,11 +1661,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white35 == true) {
                                   white35 = false;
                                   return col35 = Colors.white;
-                                  oalgs.remove("R U2 R2 F R F' R U2 R'");
                                 } else {
                                   white35 = true;
                                   return col35 = Colors.green;
-                                  oalgs.add("R U2 R2 F R F' R U2 R'");
                                 }
                               });
                             },
@@ -1673,11 +1697,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white36 == true) {
                                   white36 = false;
                                   return col36 = Colors.white;
-                                  oalgs.remove("L' U' L U' L' U L U L F' L' F");
                                 } else {
                                   white36 = true;
                                   return col36 = Colors.green;
-                                  oalgs.add("L' U' L U' L' U L U L F' L' F");
                                 }
                               });
                             },
@@ -1711,11 +1733,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white37 == true) {
                                   white37 = false;
                                   return col37 = Colors.white;
-                                  oalgs.remove("F R' F' R U R U' R'");
                                 } else {
                                   white37 = true;
                                   return col37 = Colors.green;
-                                  oalgs.add("F R' F' R U R U' R'");
                                 }
                               });
                             },
@@ -1749,12 +1769,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                   if (white38 == true) {
                                     white38 = false;
                                     return col38 = Colors.white;
-                                    oalgs.remove(
-                                        "R U R' U R U' R' U' R' F R F'");
                                   } else {
                                     white38 = true;
                                     return col38 = Colors.green;
-                                    oalgs.add("R U R' U R U' R' U' R' F R F'");
                                   }
                                 });
                               },
@@ -1787,11 +1804,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white39 == true) {
                                   white39 = false;
                                   return col39 = Colors.white;
-                                  oalgs.remove("L F' L' U' L U F U' L'");
                                 } else {
                                   white39 = true;
                                   return col39 = Colors.green;
-                                  oalgs.add("L F' L' U' L U F U' L'");
                                 }
                               });
                             },
@@ -1825,11 +1840,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white40 == true) {
                                   white40 = false;
                                   return col40 = Colors.white;
-                                  oalgs.remove("R' F R U R' U' F' U R");
                                 } else {
                                   white40 = true;
                                   return col40 = Colors.green;
-                                  oalgs.add("R' F R U R' U' F' U R");
                                 }
                               });
                             },
@@ -1863,12 +1876,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white41 == true) {
                                   white41 = false;
                                   return col41 = Colors.white;
-                                  oalgs.remove(
-                                      "R U R' U R U2 R' F R U R' U' F'");
                                 } else {
                                   white41 = true;
                                   return col41 = Colors.green;
-                                  oalgs.add("R U R' U R U2 R' F R U R' U' F'");
                                 }
                               });
                             },
@@ -1902,13 +1912,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white42 == true) {
                                   white42 = false;
                                   return col42 = Colors.white;
-                                  oalgs.remove(
-                                      "R' U' R U' R' U2 R F R U R' U' F'");
                                 } else {
                                   white42 = true;
                                   return col42 = Colors.green;
-                                  oalgs
-                                      .add("R' U' R U' R' U2 R F R U R' U' F'");
                                 }
                               });
                             },
@@ -1942,11 +1948,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white43 == true) {
                                   white43 = false;
                                   return col43 = Colors.white;
-                                  oalgs.remove("f ' L' U' L U f");
                                 } else {
                                   white43 = true;
                                   return col43 = Colors.green;
-                                  oalgs.add("f ' L' U' L U f");
                                 }
                               });
                             },
@@ -1980,11 +1984,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white44 == true) {
                                   white44 = false;
                                   return col44 = Colors.white;
-                                  oalgs.remove("f R U R' U' f'");
                                 } else {
                                   white44 = true;
                                   return col44 = Colors.green;
-                                  oalgs.add("f R U R' U' f'");
                                 }
                               });
                             },
@@ -2018,11 +2020,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white45 == true) {
                                   white45 = false;
                                   return col45 = Colors.white;
-                                  oalgs.remove("F R U R' U' F'");
                                 } else {
                                   white45 = true;
                                   return col45 = Colors.green;
-                                  oalgs.add("F R U R' U' F'");
                                 }
                               });
                             },
@@ -2034,9 +2034,10 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 Text(
                                   "F R U R' U' F'",
                                   style: TextStyle(
-                                      fontSize: fontSize,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Oswald'),
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald',
+                                  ),
                                 ),
                               ],
                             ),
@@ -2056,11 +2057,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white46 == true) {
                                   white46 = false;
                                   return col46 = Colors.white;
-                                  oalgs.remove("R' U' R' F R F' U R");
                                 } else {
                                   white46 = true;
                                   return col46 = Colors.green;
-                                  oalgs.add("R' U' R' F R F' U R");
                                 }
                               });
                             },
@@ -2094,11 +2093,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white47 == true) {
                                   white47 = false;
                                   return col47 = Colors.white;
-                                  oalgs.remove("R' U' R' F R F' U R");
                                 } else {
                                   white47 = true;
                                   return col47 = Colors.green;
-                                  oalgs.add("R' U' R' F R F' U R");
                                 }
                               });
                             },
@@ -2132,11 +2129,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white48 == true) {
                                   white48 = false;
                                   return col48 = Colors.white;
-                                  oalgs.remove("F R U R' U' R U R' U' F'");
                                 } else {
                                   white48 = true;
                                   return col48 = Colors.green;
-                                  oalgs.add("F R U R' U' R U R' U' F'");
                                 }
                               });
                             },
@@ -2170,11 +2165,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white49 == true) {
                                   white49 = false;
                                   return col49 = Colors.white;
-                                  oalgs.remove("r U' r2 U r2 U r2 U' r");
                                 } else {
                                   white49 = true;
                                   return col49 = Colors.green;
-                                  oalgs.add("r U' r2 U r2 U r2 U' r");
                                 }
                               });
                             },
@@ -2208,11 +2201,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white50 == true) {
                                   white50 = false;
                                   return col50 = Colors.white;
-                                  oalgs.remove("r' U r2 U' r2 U' r2 U r'");
                                 } else {
                                   white50 = true;
                                   return col50 = Colors.green;
-                                  oalgs.add("r' U r2 U' r2 U' r2 U r'");
                                 }
                               });
                             },
@@ -2246,11 +2237,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white51 == true) {
                                   white51 = false;
                                   return col51 = Colors.white;
-                                  oalgs.remove("F U R U' R' U R U' R' F'");
                                 } else {
                                   white51 = true;
                                   return col51 = Colors.green;
-                                  oalgs.add("F U R U' R' U R U' R' F'");
                                 }
                               });
                             },
@@ -2284,11 +2273,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white52 == true) {
                                   white52 = false;
                                   return col52 = Colors.white;
-                                  oalgs.remove("R U R' U R U' B U' B' R'");
                                 } else {
                                   white52 = true;
                                   return col52 = Colors.green;
-                                  oalgs.add("R U R' U R U' B U' B' R'");
                                 }
                               });
                             },
@@ -2322,11 +2309,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white53 == true) {
                                   white53 = false;
                                   return col53 = Colors.white;
-                                  oalgs.remove("l' U2 L U L' U' L U L' U l");
                                 } else {
                                   white53 = true;
                                   return col53 = Colors.green;
-                                  oalgs.add("l' U2 L U L' U' L U L' U l");
                                 }
                               });
                             },
@@ -2360,11 +2345,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white54 == true) {
                                   white54 = false;
                                   return col54 = Colors.white;
-                                  oalgs.remove("r U2 R' U' R U R' U' R U' r'");
                                 } else {
                                   white54 = true;
                                   return col54 = Colors.green;
-                                  oalgs.add("r U2 R' U' R U R' U' R U' r'");
                                 }
                               });
                             },
@@ -2398,13 +2381,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white55 == true) {
                                   white55 = false;
                                   return col55 = Colors.white;
-                                  oalgs.remove(
-                                      "R' F R U R U' R2 F' R2 U' R' U R U R'");
                                 } else {
                                   white55 = true;
                                   return col55 = Colors.green;
-                                  oalgs.add(
-                                      "R' F R U R U' R2 F' R2 U' R' U R U R'");
                                 }
                               });
                             },
@@ -2438,13 +2417,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white56 == true) {
                                   white56 = false;
                                   return col56 = Colors.white;
-                                  oalgs.remove(
-                                      "r' U' r U' R' U R U' R' U R r' U r");
                                 } else {
                                   white56 = true;
                                   return col56 = Colors.green;
-                                  oalgs.add(
-                                      "r' U' r U' R' U R U' R' U R r' U r");
                                 }
                               });
                             },
@@ -2478,11 +2453,9 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                                 if (white57 == true) {
                                   white57 = false;
                                   return col57 = Colors.white;
-                                  oalgs.remove("R U R' U' M' U R U' r'");
                                 } else {
                                   white57 = true;
                                   return col57 = Colors.green;
-                                  oalgs.add("R U R' U' M' U R U' r'");
                                 }
                               });
                             },
@@ -2503,6 +2476,1154 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
                             color: col57,
                           ),
                         ),
+                      ), //#57
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PLL Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+
+var white1AP = false;
+Color col1AP = Colors.white;
+var white2AP = false;
+Color col2AP = Colors.white;
+var white3AP = false;
+Color col3AP = Colors.white;
+var white4AP = false;
+Color col4AP = Colors.white;
+var white5AP = false;
+Color col5AP = Colors.white;
+var white6AP = false;
+Color col6AP = Colors.white;
+var white7AP = false;
+Color col7AP = Colors.white;
+var white8AP = false;
+Color col8AP = Colors.white;
+var white9AP = false;
+Color col9AP = Colors.white;
+var white10AP = false;
+Color col10AP = Colors.white;
+var white11AP = false;
+Color col11AP = Colors.white;
+var white12AP = false;
+Color col12AP = Colors.white;
+var white13AP = false;
+Color col13AP = Colors.white;
+var white14AP = false;
+Color col14AP = Colors.white;
+var white15AP = false;
+Color col15AP = Colors.white;
+var white16AP = false;
+Color col16AP = Colors.white;
+var white17AP = false;
+Color col17AP = Colors.white;
+var white18AP = false;
+Color col18AP = Colors.white;
+var white19AP = false;
+Color col19AP = Colors.white;
+var white20AP = false;
+Color col20AP = Colors.white;
+var white21AP = false;
+Color col21AP = Colors.white;
+
+var allpll = true;
+var plledges = false;
+var pllcorners = false;
+
+DecidePLLPage() {
+  if (allpll == true) {
+    return Container(
+      child: PLL(),
+    );
+  } else {
+    return Container(
+      child: PLLEdges(),
+    );
+  }
+}
+
+//PLL Dropdown
+
+class PLLDropDown extends StatefulWidget {
+  PLLDropDown({Key key}) : super(key: key);
+
+  @override
+  _PLLDropDownState createState() => _PLLDropDownState();
+}
+
+class _PLLDropDownState extends State<PLLDropDown> {
+  String dropdownValue = 'All';
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.white,
+            ),
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 3),
+            padding: EdgeInsets.all(5),
+            child: Row(
+              children: [
+                SizedBox(width: 5),
+                Text("Sort by "),
+                SizedBox(width: 25.0),
+                DropdownButton<String>(
+                    value: dropdownValue,
+                    dropdownColor: Colors.white,
+                    focusColor: Colors.white,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.black54),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                        if (dropdownValue == 'All') {
+                          allpll = true;
+                          plledges = false;
+                          pllcorners = false;
+                        }
+                        if (dropdownValue == 'Edges Only') {
+                          allpll = false;
+                          plledges = true;
+                          pllcorners = false;
+                        }
+                        if (dropdownValue == 'Corners Only') {
+                          allpll = false;
+                          plledges = false;
+                          pllcorners = true;
+                        }
+                      });
+                    },
+                    items: <String>['All', 'Edges Only', 'Corners Only']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList()),
+                SizedBox(width: 25),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//PLL Page
+class PLLPage extends StatefulWidget {
+  @override
+  _PLLPageState createState() => _PLLPageState();
+}
+
+class _PLLPageState extends State<PLLPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Pll Trainer"),
+        backgroundColor: Colors.orange,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Container(
+              child: Column(
+                children: [
+                  PLLDropDown(),
+                  PLL(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+///TODO: Fix text formatting on buttons, fix the dropdownbutton issue and be able to extract the dropdownvalue
+
+//Full PLL
+class PLL extends StatefulWidget {
+  @override
+  _PLLState createState() => _PLLState();
+}
+
+class _PLLState extends State<PLL> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("PLL Trainer"),
+        backgroundColor: Colors.orange,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      PLLDropDown(),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white1AP == true) {
+                                  white1AP = false;
+                                  return col1AP = Colors.white;
+                                } else {
+                                  white1AP = true;
+                                  return col1AP = Colors.green;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/H.png'),
+                                ),
+                                Text(
+                                  "M2 U M2 U2 M2 U M2",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col1,
+                          ),
+                        ),
+                      ), //#1
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white2AP == true) {
+                                  col2AP = Colors.white;
+                                  white2AP = false;
+                                } else {
+                                  col2AP = Colors.green;
+                                  white2AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Z.png'),
+                                ),
+                                Text(
+                                  "M' U M2 U M2 U M' U2 M2",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col2,
+                          ),
+                        ),
+                      ), //#2
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white3AP == true) {
+                                  col3AP = Colors.white;
+                                  white3AP = false;
+                                } else {
+                                  col3AP = Colors.green;
+                                  white3AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Ua.png'),
+                                ),
+                                Text(
+                                  "M2 U M U2 M' U M2",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col3,
+                          ),
+                        ),
+                      ), //#3
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white4AP == true) {
+                                  col4AP = Colors.white;
+                                  white4AP = false;
+                                } else {
+                                  col4AP = Colors.green;
+                                  white4AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Ub.png'),
+                                ),
+                                Text(
+                                  "M2 U' M U2 M' U' M2",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col4,
+                          ),
+                        ),
+                      ), //#4
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white5AP == true) {
+                                  col5AP = Colors.white;
+                                  white5AP = false;
+                                } else {
+                                  col5AP = Colors.green;
+                                  white5AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Aa.png'),
+                                ),
+                                Text(
+                                  "x L2 D2 L' U' L D2 L' U L'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col5,
+                          ),
+                        ),
+                      ), //#5
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white6AP == true) {
+                                  col6AP = Colors.white;
+                                  white6AP = false;
+                                } else {
+                                  col6AP = Colors.green;
+                                  white6AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Ab.png'),
+                                ),
+                                Text(
+                                  "x' L2 D2 L U L' D2 L U' L",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col6,
+                          ),
+                        ),
+                      ), //#6
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white7AP == true) {
+                                  col7AP = Colors.white;
+                                  white7AP = false;
+                                } else {
+                                  col7AP = Colors.green;
+                                  white7AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/E.png'),
+                                ),
+                                Text(
+                                  "x' L' U L D' L' U' L D L' U' L D' L' U L D",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col7,
+                          ),
+                        ),
+                      ), //#7
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white8AP == true) {
+                                  col8AP = Colors.white;
+                                  white8AP = false;
+                                } else {
+                                  col8AP = Colors.green;
+                                  white8AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/T.png'),
+                                ),
+                                Text(
+                                  "R U R' U' R' F R2 U' R' U' R U R' F'",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col8,
+                          ),
+                        ),
+                      ), //#8
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white9AP == true) {
+                                  col9AP = Colors.white;
+                                  white9AP = false;
+                                } else {
+                                  col9AP = Colors.green;
+                                  white9AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Y.png'),
+                                ),
+                                Text(
+                                  "F R U' R' U' R U R' F' R U R' U'\nR' F R F'",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col9,
+                          ),
+                        ),
+                      ), //#9
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white10AP == true) {
+                                  col10AP = Colors.white;
+                                  white10AP = false;
+                                } else {
+                                  col10AP = Colors.green;
+                                  white10AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/F.png'),
+                                ),
+                                Text(
+                                  "R' U' F' R U R' U' R' F R2 U' R'\nU' R U R' U R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col10,
+                          ),
+                        ),
+                      ), //#10
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                              shape: shape,
+                              onPressed: () {
+                                setState(() {
+                                  if (white11AP == true) {
+                                    col11AP = Colors.white;
+                                    white11AP = false;
+                                  } else {
+                                    col11AP = Colors.green;
+                                    white11AP = true;
+                                  }
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Image(
+                                    image: AssetImage('assets/V.png'),
+                                  ),
+                                  Text(
+                                    "R' U R' U' y R' F' R2 U' R' U R'\nF R F",
+                                    style: TextStyle(
+                                        fontSize: fontSize,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Oswald'),
+                                  ),
+                                ],
+                              ),
+                              color: col12),
+                        ),
+                      ), //#11
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white12AP == true) {
+                                  col12AP = Colors.white;
+                                  white12AP = false;
+                                } else {
+                                  col12AP = Colors.green;
+                                  white12AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Ja.png'),
+                                ),
+                                Text(
+                                  "x R2 F R F' R U2 r' U r U2",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col13,
+                          ),
+                        ),
+                      ), //#12
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white13AP == true) {
+                                  col13AP = Colors.white;
+                                  white13AP = false;
+                                } else {
+                                  col13AP = Colors.green;
+                                  white13AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Jb.png'),
+                                ),
+                                Text(
+                                  "R U R' F' R U R' U' R' F R2 U' R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col14,
+                          ),
+                        ),
+                      ), //#13
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white14AP == true) {
+                                  col14AP = Colors.white;
+                                  white14AP = false;
+                                } else {
+                                  col14AP = Colors.green;
+                                  white14AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Ra.png'),
+                                ),
+                                Text(
+                                  "R U' R' U' R U R D R' U' R D'\nR' U2 R'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col15,
+                          ),
+                        ),
+                      ), //#14
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white15AP == true) {
+                                  col15AP = Colors.white;
+                                  white15AP = false;
+                                } else {
+                                  col15AP = Colors.green;
+                                  white15AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Rb.png'),
+                                ),
+                                Text(
+                                  "R2 F R U R U' R' F' R U2 R' U2 R",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col16,
+                          ),
+                        ),
+                      ), //#15
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white16AP == true) {
+                                  col16AP = Colors.white;
+                                  white16AP = false;
+                                } else {
+                                  col16AP = Colors.green;
+                                  white16AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Na.png'),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "R U R' U R U R' F' R U R'\nU' R' F R2 U' R' U2 R U' R'",
+                                      style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Oswald'),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            color: col17,
+                          ),
+                        ),
+                      ), //#16
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white17AP == true) {
+                                  col17AP = Colors.white;
+                                  white17AP = false;
+                                } else {
+                                  col17AP = Colors.green;
+                                  white17AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Nb.png'),
+                                ),
+                                Text(
+                                  "R' U R U' R' F' U' F R U R' F R'\nF' R U' R",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col18,
+                          ),
+                        ),
+                      ), //#17
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white18AP == true) {
+                                  col18AP = Colors.white;
+                                  white18AP = false;
+                                } else {
+                                  col18AP = Colors.green;
+                                  white18AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Ga.png'),
+                                ),
+                                Text(
+                                  "R2 U R' U R' U' R U' R2 U' D\nR' U R D'",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col19,
+                          ),
+                        ),
+                      ), //#18
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white19AP == true) {
+                                  col19AP = Colors.white;
+                                  white19AP = false;
+                                } else {
+                                  col19AP = Colors.green;
+                                  white19AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Gb.png'),
+                                ),
+                                Text(
+                                  "R' U' R U D' R2 U R' U R U' R\nU' R2 D",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col20,
+                          ),
+                        ),
+                      ), //#19
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white20AP == true) {
+                                  col20AP = Colors.white;
+                                  white20AP = false;
+                                } else {
+                                  col20AP = Colors.green;
+                                  white20AP = true;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/Gc.png'),
+                                ),
+                                Text(
+                                  "R2 U' R U' R U R' U R2 U D'\nR U' R' D",
+                                  style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col21,
+                          ),
+                        ),
+                      ), //#20
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                              shape: shape,
+                              onPressed: () {
+                                setState(() {
+                                  if (white21AP == true) {
+                                    col21AP = Colors.white;
+                                    white21AP = false;
+                                  } else {
+                                    col21AP = Colors.green;
+                                    white21AP = true;
+                                  }
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Image(
+                                    image: AssetImage('assets/Gd.png'),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "R U R' U' D R2 U' R U' R' U R'\nU R2 D'",
+                                        style: TextStyle(
+                                            fontSize: fontSize,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Oswald'),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              color: col22),
+                        ),
+                      ), //#21
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+var white1PE = false;
+Color col1PE = Colors.white;
+var white2PE = false;
+Color col2PE = Colors.white;
+var white3PE = false;
+Color col3PE = Colors.white;
+var white4PE = false;
+Color col4PE = Colors.white;
+
+//PLL Edges
+class PLLEdges extends StatefulWidget {
+  @override
+  _PLLEdgesState createState() => _PLLEdgesState();
+}
+
+class _PLLEdgesState extends State<PLLEdges> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("PLL Trainer"),
+        backgroundColor: Colors.orange,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      //PLLDropDown(),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white1PE == true) {
+                                  col1PE = Colors.white;
+                                  white1PE = false;
+                                } else {
+                                  col1PE = Colors.green;
+                                  white1PE = true;
+                                }
+                              });
+                            },
+                            child: Text(
+                              "M2 U M2 U2 M2 U M2",
+                              style: TextStyle(
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Oswald'),
+                            ),
+                            color: col1,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white2PE == true) {
+                                  col2PE = Colors.white;
+                                  white2PE = false;
+                                } else {
+                                  col2PE = Colors.green;
+                                  white2PE = true;
+                                }
+                              });
+                            },
+                            child: Text(
+                              "M' U M2 U M2 U M' U2 M2",
+                              style: TextStyle(
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Oswald'),
+                            ),
+                            color: col2,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white3PE == true) {
+                                  col3PE = Colors.white;
+                                  white3PE = false;
+                                } else {
+                                  col3PE = Colors.green;
+                                  white3PE = true;
+                                }
+                              });
+                            },
+                            child: Text(
+                              "M2 U M U2 M' U M2",
+                              style: TextStyle(
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Oswald'),
+                            ),
+                            color: col3,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white4PE == true) {
+                                  col4PE = Colors.white;
+                                  white4PE = false;
+                                } else {
+                                  col4PE = Colors.green;
+                                  white4PE = true;
+                                }
+                              });
+                            },
+                            child: Text(
+                              "M2 U' M U2 M' U' M2",
+                              style: TextStyle(
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Oswald'),
+                            ),
+                            color: col4,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -2516,21 +3637,23 @@ class _OLL_TrainerState extends State<OLL_Trainer> {
   }
 }
 
-String dropdownValue = 'All';
-//var valuetrue = false;
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Timer Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
 
 //Timer Dropdown
-// ignore: camel_case_types
-class PLL_DropDown extends StatefulWidget {
-  PLL_DropDown({Key key}) : super(key: key);
+class TimerDropDown extends StatefulWidget {
+  TimerDropDown({Key key}) : super(key: key);
 
   @override
-  _PLL_DropDownState createState() => _PLL_DropDownState();
+  _TimerDropDownState createState() => _TimerDropDownState();
 }
 
-//Timer_dropdown
-// ignore: camel_case_types
-class _PLL_DropDownState extends State<PLL_DropDown> {
+class _TimerDropDownState extends State<TimerDropDown> {
+  String dropdownValue = 'All';
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -2560,10 +3683,8 @@ class _PLL_DropDownState extends State<PLL_DropDown> {
                         dropdownValue = newValue;
                       });
                     },
-                    items: <String>[
-                      'All',
-                      'Selected items',
-                    ].map<DropdownMenuItem<String>>((String value) {
+                    items: <String>['All', 'Learning(the green ones)']
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -2576,21 +3697,6 @@ class _PLL_DropDownState extends State<PLL_DropDown> {
         ],
       ),
     );
-  }
-}
-
-//PLL Page
-// ignore: camel_case_types
-class PLL_Trainer extends StatefulWidget {
-  @override
-  _PLL_TrainerState createState() => _PLL_TrainerState();
-}
-
-// ignore: camel_case_types
-class _PLL_TrainerState extends State<PLL_Trainer> {
-  @override
-  Widget build(BuildContext context) {
-    return All_PLL();
   }
 }
 
@@ -2607,10 +3713,31 @@ class _TimerState extends State<Timer> {
     var height3 = AppBar().preferredSize.height;
     double height4 = MediaQuery.of(context).size.height - 110;
     double height5 = height4 - kToolbarHeight - height3;
-    bool timeron = false;
-    bool timeroff = true;
-    var starttime = DateTime.now();
-    var endtime = DateTime.now();
+    int milliseconds = 00;
+    int seconds = 00;
+    int minuets = 00;
+    int hours = 00;
+    var time = "$hours:$minuets:$seconds:$milliseconds";
+    var started = false;
+    var Tcolor = Colors.white;
+    String stoptimetodisplay = "00:00:00:00";
+    var swatch = Stopwatch();
+    final dur = const Duration(seconds: 1);
+
+    void keeprunning() {}
+
+    void startstopwatch() {
+      setState(() {
+        swatch.start();
+      });
+    }
+
+    void stopstopwatch() {
+      setState(() {
+        swatch.stop();
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Timer"),
@@ -2620,28 +3747,33 @@ class _TimerState extends State<Timer> {
         children: [
           Container(
             height: 100.0,
-            child: PLL_DropDown(),
+            child: PLLDropDown(),
           ),
           SizedBox(
             height: 10.0,
           ),
-          GestureDetector(
-            onTap: () {
+          FlatButton(
+            height: height5,
+            minWidth: width,
+            color: Tcolor,
+            onPressed: () {
               setState(() {
-                if (timeron == true) {
-                  timeroff = false;
-                  starttime = DateTime.now();
+                if (started == false) {
+                  startstopwatch();
+                  started = true;
                 } else {
-                  timeroff = true;
-                  endtime = DateTime.now();
+                  if (started == true) {
+                    stopstopwatch();
+                    started = false;
+                  }
                 }
               });
             },
-            child: Container(
-              width: width,
-              height: height5,
-              color: Colors.white70,
-              child: Center(child: Text("Start: $starttime")),
+            child: Center(
+              child: Text(
+                "$time",
+                style: TextStyle(fontSize: 100),
+              ),
             ),
           ),
         ],
