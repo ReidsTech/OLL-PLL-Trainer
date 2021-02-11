@@ -2554,6 +2554,8 @@ DecidePLLPage() {
   }
 }
 
+var value = 'All';
+
 //PLL Dropdown
 
 class PLLDropDown extends StatefulWidget {
@@ -2585,7 +2587,7 @@ class _PLLDropDownState extends State<PLLDropDown> {
                 Text("Sort by "),
                 SizedBox(width: 25.0),
                 DropdownButton<String>(
-                    value: dropdownValue,
+                    value: value,
                     dropdownColor: Colors.white,
                     focusColor: Colors.white,
                     elevation: 16,
@@ -2597,16 +2599,19 @@ class _PLLDropDownState extends State<PLLDropDown> {
                           allpll = true;
                           plledges = false;
                           pllcorners = false;
+                          value = 'All';
                         }
                         if (dropdownValue == 'Edges Only') {
                           allpll = false;
                           plledges = true;
                           pllcorners = false;
+                          value = 'Edges Only';
                         }
                         if (dropdownValue == 'Corners Only') {
                           allpll = false;
                           plledges = false;
                           pllcorners = true;
+                          value = 'Corners Only';
                         }
                       });
                     },
