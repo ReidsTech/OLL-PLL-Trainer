@@ -4,8 +4,9 @@ import 'package:flutter/foundation.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
-var height1 = 210.0;
+var height1 = 170.0;
 var fontSize1 = 50.0;
+var fontSize2 = 25.0;
 var height = 160.0;
 var minWidth = 50.0;
 var fontSize = 17.0;
@@ -36,6 +37,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Animation animation,
       delayedAnimation,
       muchDelayedAnimation,
+      veryDelayedAnimation,
       transformationAnim;
   AnimationController animationController;
 
@@ -56,6 +58,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     muchDelayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
         parent: animationController,
         curve: Interval(0.40, 1.0, curve: Curves.fastOutSlowIn)));
+    
+    veryDelayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.70, 1.0, curve: Curves.fastOutSlowIn)));
 
     animationController.forward();
   }
@@ -68,7 +74,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: AppBar(
         title: Text("OLL and PLL Trainer"),
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blueAccent
       ),
       body: Center(
         child: Container(
@@ -86,6 +92,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+                  SizedBox(
+                    height: 5.0,
+                  ),
                   Transform(
                     transform: Matrix4.translationValues(
                         animation.value * width, 0.0, 0.0),
@@ -102,18 +111,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => OLLTrainer(),
+                                builder: (context) => threexthree(),
                               ),
                             );
                           },
                           child: Text(
-                            "OLL Trainer",
+                            "3x3",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: fontSize1,
                                 fontFamily: 'Oswald'),
                           ),
-                          color: Colors.amber,
+                          color: Colors.red,
                         ),
                       ),
                     ),
@@ -182,9 +191,667 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
+                  Transform(
+                    transform: Matrix4.translationValues(
+                        veryDelayedAnimation.value * width, 0.0, 0.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ButtonTheme(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        minWidth: minWidth,
+                        height: height1,
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Timer(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Timer",
+                            style: TextStyle(
+                              fontSize: fontSize1,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Oswald',
+                            ),
+                          ),
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~3x3 Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+
+//The 3x3 Page
+class threexthree extends StatefulWidget {
+  @override
+  _threexthreeState createState() => _threexthreeState();
+}
+
+class _threexthreeState extends State<threexthree> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("3x3 Algorithms"),
+        backgroundColor: Colors.amber,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 200.0,
+                          shape: shape,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OLL(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_1br.png'),
+                                ),
+                                Text(
+                                  "OLL Algorithms",
+                                  style: TextStyle(
+                                    fontSize: fontSize2,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            color: col1,
+                          ),
+                        ),
+                      ), //OLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          shape: shape,
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PLL(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_2 .png'),
+                                ),
+                                Text(
+                                  "PLL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col2,
+                          ),
+                        ),
+                      ), //PLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CLL(),
+                                ),
+                              );
+                            },
+                            child: Row(children: [
+                              Image(
+                                image: AssetImage('assets/O_3.png'),
+                              ),
+                              Text(
+                                "CLL Algorithms",
+                                style: TextStyle(
+                                    fontSize: fontSize2,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald'),
+                              ),
+                            ]),
+                            color: col3,
+                          ),
+                        ),
+                      ), //CLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ELL(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_4.png'),
+                                ),
+                                Text(
+                                  "ELL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col4,
+                          ),
+                        ),
+                      ), //ELL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CLS(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_6.png'),
+                                ),
+                                Text(
+                                  "CLS Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col6,
+                          ),
+                        ),
+                      ), //CLS
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ELS(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_7.png'),
+                                ),
+                                Text(
+                                  "ELS Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col7,
+                          ),
+                        ),
+                      ), //ELS
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CMLL(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_5.png'),
+                                ),
+                                Text(
+                                  "CMLL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col5,
+                          ),
+                        ),
+                      ), //CMLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ZBLL(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_8.png'),
+                                ),
+                                Text(
+                                  "ZBLL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col8,
+                          ),
+                        ),
+                      ), //ZBLL
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~2x2 Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+
+//The 2x2 Page
+class twoxtwo extends StatefulWidget {
+  @override
+  _twoxtwoState createState() => _twoxtwoState();
+}
+
+class _twoxtwoState extends State<twoxtwo> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("2x2 Algorithms"),
+        backgroundColor: Colors.amber,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 200.0,
+                          shape: shape,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white1 == true) {
+                                  white1 = false;
+                                  return col1 = Colors.white;
+                                } else {
+                                  white1 = true;
+                                  return col1 = Colors.green;
+                                }
+                              });
+                              print(oalgs);
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_1br.png'),
+                                ),
+                                Text(
+                                  "OLL Algorithms",
+                                  style: TextStyle(
+                                    fontSize: fontSize2,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            color: col1,
+                          ),
+                        ),
+                      ), //OLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          shape: shape,
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white2 == true) {
+                                  white2 = false;
+                                  return col2 = Colors.white;
+                                } else {
+                                  white2 = true;
+                                  return col2 = Colors.green;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_2 .png'),
+                                ),
+                                Text(
+                                  "PLL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col2,
+                          ),
+                        ),
+                      ), //PBL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white3 == true) {
+                                  white3 = false;
+                                  return col3 = Colors.white;
+                                } else {
+                                  white3 = true;
+                                  return col3 = Colors.green;
+                                }
+                              });
+                            },
+                            child: Row(children: [
+                              Image(
+                                image: AssetImage('assets/O_3.png'),
+                              ),
+                              Text(
+                                "CLL Algorithms",
+                                style: TextStyle(
+                                    fontSize: fontSize2,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald'),
+                              ),
+                            ]),
+                            color: col3,
+                          ),
+                        ),
+                      ), //CLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            shape: shape,
+                            onPressed: () {
+                              setState(() {
+                                if (white4 == true) {
+                                  white4 = false;
+                                  return col4 = Colors.white;
+                                } else {
+                                  white4 = true;
+                                  return col4 = Colors.green;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_4.png'),
+                                ),
+                                Text(
+                                  "ELL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col4,
+                          ),
+                        ),
+                      ), //EG-1
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4x4 Page~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+
+//The 4x4 Page
+class fourxfour extends StatefulWidget {
+  @override
+  _fourxfourState createState() => _fourxfourState();
+}
+
+class _fourxfourState extends State<fourxfour> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("4x4 Algorithms"),
+        backgroundColor: Colors.amber,
+      ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/Cube.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          minWidth: 200.0,
+                          shape: shape,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white1 == true) {
+                                  white1 = false;
+                                  return col1 = Colors.white;
+                                } else {
+                                  white1 = true;
+                                  return col1 = Colors.green;
+                                }
+                              });
+                              print(oalgs);
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_1br.png'),
+                                ),
+                                Text(
+                                  "OLL Algorithms",
+                                  style: TextStyle(
+                                    fontSize: fontSize2,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Oswald',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            color: col1,
+                          ),
+                        ),
+                      ), //OLL
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                          shape: shape,
+                          minWidth: 125.0,
+                          height: height,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                if (white2 == true) {
+                                  white2 = false;
+                                  return col2 = Colors.white;
+                                } else {
+                                  white2 = true;
+                                  return col2 = Colors.green;
+                                }
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/O_2 .png'),
+                                ),
+                                Text(
+                                  "PLL Algorithms",
+                                  style: TextStyle(
+                                      fontSize: fontSize2,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Oswald'),
+                                ),
+                              ],
+                            ),
+                            color: col2,
+                          ),
+                        ),
+                      ), //PLL
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
