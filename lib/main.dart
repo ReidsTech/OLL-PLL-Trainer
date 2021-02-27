@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import '3x3 Page.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
@@ -143,12 +144,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PLL(),
+                                builder: (context) => twoxtwo(),
                               ),
                             );
                           },
                           child: Text(
-                            "PLL Trainer",
+                            "2x2",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: fontSize1,
@@ -175,12 +176,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Timer(),
+                                builder: (context) => fourxfour(),
                               ),
                             );
                           },
                           child: Text(
-                            "Timer",
+                            "4x4",
                             style: TextStyle(
                                 fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
